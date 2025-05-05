@@ -13,7 +13,11 @@ const Footer = () => {
                 <div>
                     <img className='mb-5 w-32' src={assets.logo} alt='' />
                     <p className='w-full md:w-2/3 text-gray-600'>
+<<<<<<< HEAD
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+=======
+                    Chuyên nghiệp trong công việc, tận tình tận tâm phục vụ, uy tín trong kinh doanh, mang nhiều sản phẩm chất lượng với giá cả hợp lý 
+>>>>>>> 4d166ce (test)
                     </p>
                 </div>
 

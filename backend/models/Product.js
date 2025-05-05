@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
+<<<<<<< HEAD
+=======
+  _id: { type: Number, required: true },
+>>>>>>> 4d166ce (test)
   name: { type: String, required: true },
   images: [{ type: String, required: true }], // Ảnh, array nhiều ảnh
   price: { type: Number, required: true },

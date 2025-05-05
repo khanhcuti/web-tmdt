@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/frontend_assets/assets'
@@ -111,21 +112,148 @@ const Collection = () => {
             <p className='flex gap-2'>
               <input className='w-3' type='checkbox' value={'Winterwear'} onChange={toggleSubCategory} /> Winterwear
             </p>
+=======
+import React, { useEffect, useState } from 'react';
+import Title from '../components/Title';
+import ProductItem from '../components/ProductItem';
+
+const Collection = () => {
+  const [products, setProducts] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortType, setSortType] = useState('relavent');
+  const [search, setSearch] = useState('');
+
+  // Gọi API để lấy danh sách sản phẩm
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/products');
+        const data = await response.json();
+        setProducts(data);
+        setFilterProducts(data);
+
+        // Lấy danh sách category duy nhất từ sản phẩm
+        const uniqueCategories = [...new Set(data.map((item) => item.category))];
+        setCategories(uniqueCategories);
+      } catch (error) {
+        console.error('Lỗi khi lấy danh sách sản phẩm:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Áp dụng bộ lọc khi thay đổi category, search hoặc sort
+  useEffect(() => {
+    applyFilter();
+  }, [selectedCategories, search, sortType]);
+
+  const toggleCategory = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories((prev) => prev.filter((item) => item !== category));
+    } else {
+      setSelectedCategories((prev) => [...prev, category]);
+    }
+  };
+
+  const applyFilter = () => {
+    let filtered = products.slice();
+
+    // Lọc theo từ khóa tìm kiếm
+    if (search) {
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    // Lọc theo category
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter((item) =>
+        selectedCategories.includes(item.category)
+      );
+    }
+
+    // Sắp xếp sản phẩm
+    switch (sortType) {
+      case 'low-high':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'high-low':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
+
+    setFilterProducts(filtered);
+  };
+
+  return (
+    <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
+      {/* Sidebar */}
+      <div className="min-w-60">
+        <p className="my-2 text-xl flex items-center cursor-pointer gap-2">
+          FILTERS
+        </p>
+
+        {/* Search */}
+        <div className="border border-gray-400 rounded-md mt-6">
+          <div className="flex items-center gap-2 px-4 py-3">
+            <input
+              className="flex-1 outline-none bg-inherit text-md"
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              placeholder="Search"
+            />
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div className="border border-gray-400 rounded-md pl-5 py-3 mt-6">
+          <p className="mb-3 text-sm font-medium">CATEGORIES</p>
+          <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
+            {categories.map((category, index) => (
+              <p key={index} className="flex gap-2">
+                <input
+                  className="w-3"
+                  type="checkbox"
+                  value={category}
+                  onChange={() => toggleCategory(category)}
+                />
+                {category}
+              </p>
+            ))}
+>>>>>>> 4d166ce (test)
           </div>
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className='flex-1'>
         <div className='flex justify-between text-base sm:text-2xl mb-4'>
           <Title text1={'ALL'} text2={'COLLECTIONS'} />
 
           <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-400 text-sm px-2 rounded-md' name="" id="">
+=======
+      {/* Product List */}
+      <div className="flex-1">
+        <div className="flex justify-between text-base sm:text-2xl mb-4">
+          <Title text1={'ALL'} text2={'COLLECTIONS'} />
+
+          <select
+            onChange={(e) => setSortType(e.target.value)}
+            className="border-2 border-gray-400 text-sm px-2 rounded-md"
+          >
+>>>>>>> 4d166ce (test)
             <option value="relavent">Sort by: Relavent</option>
             <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
           </select>
         </div>
 
+<<<<<<< HEAD
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
           {
             filterProducts.map((item, index) => (
@@ -139,3 +267,22 @@ const Collection = () => {
 }
 
 export default Collection
+=======
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
+          {filterProducts.map((item, index) => (
+            <ProductItem
+              key={index}
+              id={item._id}
+              name={item.name}
+              price={item.price}
+              image={item.images && item.images.length > 0 ? item.images[0] : '/default-image.jpg'}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Collection;
+>>>>>>> 4d166ce (test)

@@ -68,4 +68,39 @@ router.put('/profile', authMiddleware, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+// Thêm route để lấy danh sách tất cả users (chỉ cho admin)
+router.get('/all', authMiddleware, async (req, res) => {
+  try {
+    // Kiểm tra quyền admin
+    if (!req.user.isAdmin) {
+      return res.status(403).json({ message: 'Không có quyền truy cập' });
+    }
+
+    const users = await User.find().select('-password');
+    res.json(users);
+  } catch (error) {
+    console.error('Fetch all users error:', error);
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+});
+
+// Thêm route xóa user (chỉ cho admin)
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    // Kiểm tra quyền admin
+    if (!req.user.isAdmin) {
+      return res.status(403).json({ message: 'Không có quyền truy cập' });
+    }
+
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Delete user error:', error);
+    res.status(500).json({ message: 'Error deleting user' });
+  }
+});
+
+>>>>>>> 4d166ce (test)
 export default router;

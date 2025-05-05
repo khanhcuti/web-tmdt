@@ -15,7 +15,12 @@
     "react-dom": "^19.0.0",
     "react-google-recaptcha": "^3.1.0",
     "react-router-dom": "^7.5.0",
+<<<<<<< HEAD
     "react-toastify": "^11.0.5"
+=======
+    "react-toastify": "^11.0.5",
+    "shop": "file:"
+>>>>>>> 4d166ce (test)
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

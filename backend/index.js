@@ -9,7 +9,11 @@ const app = express();
 const __dirname = path.resolve();
 // Middleware
 app.use(cors({
+<<<<<<< HEAD
     origin: 'http://localhost:5173',
+=======
+    origin: ['http://localhost:5173', 'http://localhost:3000'],
+>>>>>>> 4d166ce (test)
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
   }));
@@ -28,12 +32,20 @@ mongoose
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+<<<<<<< HEAD
+=======
+import cartRoutes from './routes/cartRoutes.js';
+>>>>>>> 4d166ce (test)
 // Sử dụng routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+<<<<<<< HEAD
 
+=======
+app.use('/api/cart', cartRoutes);
+>>>>>>> 4d166ce (test)
 // Khởi động server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

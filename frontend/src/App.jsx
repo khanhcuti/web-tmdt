@@ -19,6 +19,10 @@ import ManageUsers from './admin/ManageUsers';
 import ManageOrders from './admin/ManageOrders';
 import ManageProducts from './admin/ManageProducts';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d166ce (test)
 const App = () => {
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
@@ -34,7 +38,11 @@ const App = () => {
         <Route path='/product/:productId' element={<Product />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
+<<<<<<< HEAD
         <Route path='/place-order' element={<PlaceOrder />} />
+=======
+        <Route path='/placeorder' element={<PlaceOrder />} />
+>>>>>>> 4d166ce (test)
         <Route path='/orders' element={<Orders />} />
         <Route path="/admin/" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
